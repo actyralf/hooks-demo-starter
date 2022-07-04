@@ -1,8 +1,9 @@
 import { Button } from "./components/Button/Button";
 import { Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
-import { ContactPage } from "./pages/ContactPage";
+import { StarWarsPage } from "./pages/StarWarsPage";
 import { Navigation } from "./components/Navigation/Navigation";
+import { RandomUserPage } from "./pages/RandomUserPage";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/starwars" element={<StarWarsPage />} />
+        <Route path="/users" element={<RandomUserPage />} />
       </Routes>
     </div>
   );
