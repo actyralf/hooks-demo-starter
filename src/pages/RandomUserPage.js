@@ -1,34 +1,21 @@
-import { useState, useEffect } from "react";
+import { useApi } from "../hooks/useApi";
 
 export const RandomUserPage = () => {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    const loadUsers = async () => {
-      try {
-        const response = await fetch("https://randomuser.me/api/?results=10");
-        if (response.ok) {
-          const data = await response.json();
-          setUsers(data.results);
-        } else {
-          throw new Error(`API returned ${response.status}`);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    loadUsers();
-  }, []);
+  const { data } = useApi({ url: "https://randomuser.me/api/?results=10" });
+
   return (
     <>
       <h2>RandomUserPage</h2>
       <ul>
-        {users.map((user) => {
-          return (
-            <li key={user.email}>
-              {user.name.first} {user.name.last}
-            </li>
-          );
-        })}
+        {data
+          ? data.results.map((user) => {
+              return (
+                <li key={user.email}>
+                  {user.name.first} {user.name.last}
+                </li>
+              );
+            })
+          : null}
       </ul>
     </>
   );
